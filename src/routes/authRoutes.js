@@ -74,6 +74,18 @@ const { duplicateUser } = require('../middleware/helper')
  *         signUp: false
  *         data: null
  *         msg: Username already exists
+ *     jwt_res:
+ *       type: object
+ *       required:
+ *         - auth
+ *         - msg
+ *       properties:
+ *         auth:
+ *           type: boolean
+ *           description: Is the user authorized.
+ *         msg:
+ *           type: string     
+ *           description: jwt message.   
  */
 
 

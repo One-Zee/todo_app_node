@@ -91,7 +91,28 @@
  *               example:
  *                 auth: true
  *                 data: [] 
- *          
+ *       401:
+ *         description: Unauthorized! Access Token was expired!.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               items:
+ *                 $ref: '#/components/schemas/jwt_res'
+ *               example:
+ *                 auth: false
+ *                 msg: Unauthorized! Access Token was expired!
+ *       403:
+ *         description: Forbidden!.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               items:
+ *                 $ref: '#/components/schemas/jwt_res'
+ *               example:
+ *                 auth: false
+ *                 msg: No token provided. 
  */
 
 /**
@@ -119,7 +140,28 @@
  *               example:
  *                 auth: true
  *                 data: [] 
- *          
+ *       401:
+ *         description: Unauthorized! Access Token was expired!.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               items:
+ *                 $ref: '#/components/schemas/jwt_res'
+ *               example:
+ *                 auth: false
+ *                 msg: Unauthorized! Access Token was expired!
+ *       403:
+ *         description: Forbidden!.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               items:
+ *                 $ref: '#/components/schemas/jwt_res'
+ *               example:
+ *                 auth: false
+ *                 msg: No token provided.           
  */
 
 
@@ -168,7 +210,28 @@
  *                 $ref: '#/components/schemas/Cat_res2'
  *               example:
  *                 auth: true
- *          
+ *       401:
+ *         description: Unauthorized! Access Token was expired!.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               items:
+ *                 $ref: '#/components/schemas/jwt_res'
+ *               example:
+ *                 auth: false
+ *                 msg: Unauthorized! Access Token was expired!
+ *       403:
+ *         description: Forbidden!.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               items:
+ *                 $ref: '#/components/schemas/jwt_res'
+ *               example:
+ *                 auth: false
+ *                 msg: No token provided.          
  */
 
 /**
@@ -223,7 +286,28 @@
  *                 $ref: '#/components/schemas/Cat_res2'
  *               example:
  *                 auth: true
- *          
+ *       401:
+ *         description: Unauthorized! Access Token was expired!.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               items:
+ *                 $ref: '#/components/schemas/jwt_res'
+ *               example:
+ *                 auth: false
+ *                 msg: Unauthorized! Access Token was expired! 
+ *       403:
+ *         description: Forbidden!.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               items:
+ *                 $ref: '#/components/schemas/jwt_res'
+ *               example:
+ *                 auth: false
+ *                 msg: No token provided.           
  */
 
 
