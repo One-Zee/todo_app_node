@@ -24,7 +24,7 @@ exports.signIn = async (req,res) => {
                 res.status(400).json({ auth: false, accessToken: null, msg: "Invalid Password!" });//invalid password
             }else{
                 const token = jwt.sign({ id: user.id }, ACCESS_TOKEN_SECRET, {
-                    expiresIn: EXPIRES_IN // expires in 24 hours
+                    expiresIn: EXPIRES_IN // expires in 2 hours
                   });
                 res.status(200).json({ auth: true, accessToken: token, msg: "Logged in!" })
             }

@@ -3,7 +3,7 @@ module.exports = {
     PORT: process.env.PORT || 4000,
     SALT: 8,
     ACCESS_TOKEN_SECRET: process.env.ACCESS_TOKEN_SECRET || 'Some_secret_token_string',
-    EXPIRES_IN: 60 * 60 * 24,// expires in 24 hours
+    EXPIRES_IN: 60 * 60 * 2,// expires in 2 hours
     
     //Local db config
     MONGO:{
