@@ -7,11 +7,28 @@
   * loading # Middleware #
   */
 const { duplicateUser } = require('../middleware/helper')
+const { UserValidation } = require('../middleware/validation');
  /**
   * loading # Controllers #
   */
  const { signIn , signUp } = require('../controllers/authController');
- 
+
+/**
+ * setting # routes #
+ */
+  /**
+   *  # Post # requests
+   */
+    router.post('/signin', UserValidation,  signIn );
+
+
+    router.post('/signup', UserValidation, duplicateUser, signUp );
+
+/**
+* exporting # ROUTER #
+*/
+module.exports = router;
+
  /**
  * @swagger
  * components:
@@ -85,7 +102,7 @@ const { duplicateUser } = require('../middleware/helper')
  *           description: Is the user authorized.
  *         msg:
  *           type: string     
- *           description: jwt message.   
+ *           description: description message.   
  */
 
 
@@ -197,20 +214,3 @@ const { duplicateUser } = require('../middleware/helper')
  *                 internal server error 
  *          
  */
-
-
-/**
- * setting # routes #
- */
-  /**
-   *  # Post # requests
-   */
-    router.post('/signin', signIn );
-
-
-    router.post('/signup', duplicateUser , signUp );
-
-      /**
-       * exporting # ROUTER #
-       */
-      module.exports = router;

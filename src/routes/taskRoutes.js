@@ -6,13 +6,37 @@
  /**
   * loading # Middleware #
   */
-
+const { isTaskfromCategory, } = require('../middleware/helper')
+const { taskMoveValidation, taskValidation, paramsIdValidation } = require('../middleware/validation')
  /**
   * loading # Controllers #
   */
- const { createTask, editTask, delTask} = require('../controllers/tasksController');
+ const { createTask, editTask, delTask , moveToCategory } = require('../controllers/tasksController');
 
-   /**
+ /**
+  * setting # routes #
+  */
+
+    // # GET # requests
+        //router.get('/') //get
+    
+    // # Post # requests
+        router.post('/:id', paramsIdValidation, taskValidation, createTask );
+
+    // # Del # requests
+        router.delete('/:id', delTask );
+
+    // # Put # requests
+        router.put('/:id', editTask );
+
+        router.put('/move/:id',taskMoveValidation, isTaskfromCategory, moveToCategory)
+ 
+ /**
+  * exporting # ROUTER #
+  */
+ module.exports = router;
+
+    /**
  * @swagger
  * components:
  *   schemas:
@@ -68,7 +92,7 @@
  *             schema:
  *               type: object
  *               items:
- *                 $ref: '#/components/schemas/Cat_res2'
+ *                 $ref: '#/components/schemas/jwt_res'
  *               example:
  *                 auth: true
  *       401:
@@ -117,7 +141,7 @@
  *             schema:
  *               type: object
  *               items:
- *                 $ref: '#/components/schemas/Cat_res2'
+ *                 $ref: '#/components/schemas/jwt_res'
  *               example:
  *                 auth: true
  *       400:
@@ -127,7 +151,7 @@
  *             schema:
  *               type: object
  *               items:
- *                 $ref: '#/components/schemas/Cat_res2'
+ *                 $ref: '#/components/schemas/jwt_res'
  *               example:
  *                 auth: true
  *       404:
@@ -137,7 +161,7 @@
  *             schema:
  *               type: object
  *               items:
- *                 $ref: '#/components/schemas/Cat_res2'
+ *                 $ref: '#/components/schemas/jwt_res'
  *               example:
  *                 auth: true
  *       401:
@@ -194,7 +218,7 @@
  *             schema:
  *               type: object
  *               items:
- *                 $ref: '#/components/schemas/Cat_res2'
+ *                 $ref: '#/components/schemas/jwt_res'
  *               example:
  *                 auth: true
  *       400:
@@ -204,7 +228,7 @@
  *             schema:
  *               type: object
  *               items:
- *                 $ref: '#/components/schemas/Cat_res2'
+ *                 $ref: '#/components/schemas/jwt_res'
  *               example:
  *                 auth: true
  *       404:
@@ -214,7 +238,7 @@
  *             schema:
  *               type: object
  *               items:
- *                 $ref: '#/components/schemas/Cat_res2'
+ *                 $ref: '#/components/schemas/jwt_res'
  *               example:
  *                 auth: true
  *       401:
@@ -241,23 +265,79 @@
  *                 msg: No token provided. 
  */
 
- /**
-  * setting # routes #
-  */
-
-    // # GET # requests
-        //router.get('/') //get
-    
-    // # Post # requests
-        router.post('/:id',createTask );
-
-    // # Del # requests
-        router.delete('/:id', delTask );
-
-    // # Put # requests
-        router.put('/:id', editTask );
- 
- /**
-  * exporting # ROUTER #
-  */
- module.exports = router;
+/**
+ * @swagger
+ * /api/task/move/{id}:
+ *   put:
+ *     tags: [Task] 
+ *     summary: move Task.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Task id
+ *     requestBody:
+ *       description: edit task.
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#components/schemas/Task'     
+ *                     
+ *     responses:
+ *       200:
+ *         description: Task moved.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               items:
+ *                 $ref: '#/components/schemas/jwt_res'
+ *               example:
+ *                 auth: true
+ *       400:
+ *         description: bad request client side syntax.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               items:
+ *                 $ref: '#/components/schemas/jwt_res'
+ *               example:
+ *                 auth: true
+ *                 msg: bad request 
+ *       404:
+ *         description: Task not found.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               items:
+ *                 $ref: '#/components/schemas/jwt_res'
+ *               example:
+ *                 auth: true
+ *       401:
+ *         description: Unauthorized! Access Token was expired!.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               items:
+ *                 $ref: '#/components/schemas/jwt_res'
+ *               example:
+ *                 auth: false
+ *                 msg: Unauthorized! Access Token was expired!
+ *       403:
+ *         description: Forbidden!.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               items:
+ *                 $ref: '#/components/schemas/jwt_res'
+ *               example:
+ *                 auth: false
+ *                 msg: No token provided. 
+ */

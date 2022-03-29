@@ -6,13 +6,34 @@
  /**
   * loading # Middleware #
   */
-
+const { CategoryValidation ,paramsIdValidation } = require('../middleware/validation')
  /**
   * loading # Controllers #
   */
  const { createCategory, getAllCategories, delCategory, editCategory } = require('../controllers/categoryController');
 
-  /**
+ /**
+  * setting # routes #
+  */
+
+    // # GET # requests
+        router.get('/', getAllCategories ) //get all categories from user
+    
+    // # Post # requests
+        router.post('/', CategoryValidation, createCategory );
+
+    // # Del # requests
+        router.delete('/:id', paramsIdValidation, delCategory );
+
+    // # Put # requests
+        router.put('/:id', CategoryValidation, editCategory );
+ 
+ /**
+  * exporting # ROUTER #
+  */
+ module.exports = router;
+
+   /**
  * @swagger
  * components:
  *   schemas:
@@ -54,16 +75,6 @@
  *       example:
  *         auth: true
  *         data: [{ id:623afd325184db65d9c4afb6 , title: gym , authorId: 623ac5142332c46057abf4b3 ,tasks: []}]
- *     Cat_res2:
- *       type: object
- *       required:
- *         - auth
- *       properties:
- *         auth:
- *           type: boolean
- *           description: Is the user authorized.  
- *       example:
- *         auth: true
  */
  
 /**
@@ -78,7 +89,8 @@
  * /api/category:
  *   get:
  *     tags: [Category] 
- *     summary: get all user categories and tasks. 
+ *     summary: get all user categories and tasks.
+ *     Authorization: Bearer <token>
  *     responses:
  *       200:
  *         description: data requested.
@@ -187,7 +199,7 @@
  *             schema:
  *               type: object
  *               items:
- *                 $ref: '#/components/schemas/Cat_res2'
+ *                 $ref: '#/components/schemas/jwt_res'
  *               example:
  *                 auth: true
  *       400:
@@ -197,7 +209,7 @@
  *             schema:
  *               type: object
  *               items:
- *                 $ref: '#/components/schemas/Cat_res2'
+ *                 $ref: '#/components/schemas/jwt_res'
  *               example:
  *                 auth: true
  *       404:
@@ -207,9 +219,10 @@
  *             schema:
  *               type: object
  *               items:
- *                 $ref: '#/components/schemas/Cat_res2'
+ *                 $ref: '#/components/schemas/jwt_res'
  *               example:
  *                 auth: true
+ *                 msg: not found 
  *       401:
  *         description: Unauthorized! Access Token was expired!.
  *         content:
@@ -263,7 +276,7 @@
  *             schema:
  *               type: object
  *               items:
- *                 $ref: '#/components/schemas/Cat_res2'
+ *                 $ref: '#/components/schemas/jwt_res'
  *               example:
  *                 auth: true
  *       400:
@@ -273,7 +286,7 @@
  *             schema:
  *               type: object
  *               items:
- *                 $ref: '#/components/schemas/Cat_res2'
+ *                 $ref: '#/components/schemas/jwt_res'
  *               example:
  *                 auth: true
  *       404:
@@ -283,7 +296,7 @@
  *             schema:
  *               type: object
  *               items:
- *                 $ref: '#/components/schemas/Cat_res2'
+ *                 $ref: '#/components/schemas/jwt_res'
  *               example:
  *                 auth: true
  *       401:
@@ -309,25 +322,3 @@
  *                 auth: false
  *                 msg: No token provided.           
  */
-
-
- /**
-  * setting # routes #
-  */
-
-    // # GET # requests
-        router.get('/', getAllCategories ) //get all categories from user
-    
-    // # Post # requests
-        router.post('/', createCategory );
-
-    // # Del # requests
-        router.delete('/:id', delCategory );
-
-    // # Put # requests
-        router.put('/:id', editCategory );
- 
- /**
-  * exporting # ROUTER #
-  */
- module.exports = router;
