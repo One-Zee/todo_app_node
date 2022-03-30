@@ -7,7 +7,7 @@ const UsersSchema = Joi.object({
   username: Joi
     .string()
     .min(5)
-    .max(5)
+    .max(20)
     .required(),
   password: Joi
     .string()
