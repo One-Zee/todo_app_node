@@ -7,7 +7,7 @@
     title: Joi
     .string()
     .min(3)
-    .max(20),
+    .max(50),
     completed: Joi
     .boolean()
 
