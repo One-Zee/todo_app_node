@@ -12,11 +12,11 @@ exports.createTask = async ( req, res ) => {
         const { id } = req.params;//categoryId
     
         const task = await newTask( { title } , authorId , id )
-        if(task.acknowledged){
-            if(task.modifiedCount === 0)
+        if(task.response.acknowledged){
+            if(task.response.modifiedCount === 0)
                 res.status(404).json({ auth: true , msg:'Not found'});    
             else
-                res.status(201).json({ auth: true , msg:'created' });
+                res.status(201).json({ auth: true , msg:'created', data: task.data });
         }else
             res.status(400).json({ auth: true , msg:'bad request'});
     } catch (error) {
