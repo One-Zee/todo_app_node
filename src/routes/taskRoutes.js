@@ -61,6 +61,22 @@ const { taskMoveValidation, taskValidation, paramsIdValidation } = require('../m
  *           type: array                  
  *       example:
  *         title: Category_name
+ *     task_cr:
+ *       type: object
+ *       required:
+ *         - auth
+ *         - msg
+ *         - data
+ *       properties:
+ *         auth:
+ *           type: boolean
+ *           description: Is the user authorized.
+ *         msg:
+ *           type: string     
+ *           description: description message.   
+ *         data:
+ *           schema:
+ *             $ref: '#/components/schemas/Task'               
  */
  
  
@@ -95,6 +111,8 @@ const { taskMoveValidation, taskValidation, paramsIdValidation } = require('../m
  *                 $ref: '#/components/schemas/jwt_res'
  *               example:
  *                 auth: true
+ *                 msg: created
+ *                 data: {title: some title,completed: false, _id": 62454cc163411b4c665e1a83,date": 2022-03-31T06:40:01.977Z, }      
  *       401:
  *         description: Unauthorized! Access Token was expired!.
  *         content:

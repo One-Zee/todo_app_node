@@ -25,11 +25,15 @@ const updateCategory = async ( _id, authorId, update) => {
 
 const newTask = async (data , authorId , categoryId,) => {
   const docTask = await Task.create(data);
-  return await Category.updateOne(
+  const response = await Category.updateOne(
     { _id:categoryId , authorId },
     { $push: { tasks: docTask._id } },
     { new: true, useFindAndModify: false }
   );
+  return {
+    data: docTask,
+    response
+  }
 };
 
 const deleteTask = async ( _id, authorId ) => {
