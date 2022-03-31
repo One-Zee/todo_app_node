@@ -10,7 +10,7 @@ npm install
 npm run dev
 ```
 
-### Compiles and minifies for production
+### start production
 ```
 npm run start
 ```
